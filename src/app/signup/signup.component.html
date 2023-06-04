@@ -1,0 +1,124 @@
+<div class="row">  
+    <div class="col-sm-6 offset-3">
+        <div class="text-center">
+            <br><br>
+            <h4>Sign Up</h4>
+        </div>
+
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" 
+                        formControlName = "username"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':userForm.get('username').errors && userForm.get('username').touched}"
+                        id="username"
+                        placeholder="Username">
+                    <div id="validationServerUsernameFeedback" 
+                        class="invalid-feedback" *ngIf="userForm.get('username').hasError('usernameTaken')">
+                        Username is taken
+                    </div>
+                    <div id="validationServerUsernameFeedback" 
+                        class="invalid-feedback" *ngIf="userForm.get('username').hasError('required')">
+                        Username is required
+                    </div>
+                    <div id="validationServerUsernameFeedback" 
+                        class="invalid-feedback" *ngIf="userForm.get('username').hasError('minlength')">
+                        Username must be at least 4 characters
+                    </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" 
+                        formControlName = "password"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':userForm.get('password').errors && userForm.get('password').touched}"
+                        id="password"
+                        placeholder="Password">
+                        <div id="validationServerUsernameFeedback" 
+                        class="invalid-feedback" *ngIf="userForm.get('password').hasError('required')">
+                        Password is required
+                    </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" 
+                        formControlName = "confirmPassword"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':userForm.get('confirmPassword').errors && userForm.get('confirmPassword').touched}"
+                        id="confirmPassword"
+                        placeholder="Confirm Password"
+                        autocomplete>
+                    <div id="validationServerUsernameFeedback" 
+                        class="invalid-feedback" *ngIf="userForm.get('confirmPassword').hasError('passwordMismatch')">
+                        Password Don't Match
+                    </div>
+                    <div id="validationServerUsernameFeedback" 
+                        class="invalid-feedback" *ngIf="userForm.get('confirmPassword').hasError('required')">
+                        Confirm password is required
+                    </div>
+            </div>
+                <br>
+            <section formGroupName="address">
+                <div class="row g-3">
+                    <div class="col-12">
+                      <label for="inputStreet" class="form-label">Street</label>
+                      <input type="text" 
+                      formControlName = "street"
+                      class="form-control" 
+                      id="inputStreet" 
+                      placeholder="1234 Main St">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputCity" class="form-label">City</label>
+                      <input type="text" 
+                      formControlName = "city"
+                      class="form-control" 
+                      id="inputCity">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputState" class="form-label">State</label>
+                      <select id="inputState" 
+                      formControlName = "state"
+                      class="form-select">
+                        <option value="">Choose a state</option>
+                        <option *ngFor="let state of stateOptions" [ngValue]="state">
+                            {{state}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="inputZip" class="form-label">Zip</label>
+                      <input type="text"
+                      formControlName = "zipCode"
+                      class="form-control" 
+                      id="inputZip">
+                    </div>
+                    
+                    
+                </div>
+            </section>
+
+            <br>  
+
+            <p>
+                <button class="btn btn-success" type="submit" [disabled]="userForm.invalid">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    Save
+                </button>
+                <button (click)="clear()" class="btn btn-warning" style="color: #fff; margin-left: 10px;">
+                    <img src="./assets/icons8-clear-30.png" style="width: 20px; height: 20px;">
+                    Clear
+                </button>
+                <button (click)="autoFillAddress()" class="btn btn-info" style="color: #fff; margin-left: 10px;">
+                    <i class="fa fa-address-card" aria-hidden="true"></i>
+                    Auto Fill Address
+                </button>
+            </p>
+        </form>
+        
+       
+    </div>
+</div>
